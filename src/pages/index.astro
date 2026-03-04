@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatStrip from '../components/StatStrip.astro';
+import ProofBlock from '../components/ProofBlock.astro';
+import EcosystemGrid from '../components/EcosystemGrid.astro';
+import Roadmap from '../components/Roadmap.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+---
+
+<BaseLayout
+  title="Verified Software — When AI Writes the World's Code, Who Checks the Math?"
+  description="The practitioner's guide to formally verified software. Tracking the convergence of AI and mathematical proof."
+>
+  <!-- Hero -->
+  <section class="min-h-screen flex flex-col justify-center px-6 pt-16">
+    <div class="max-w-4xl mx-auto">
+      <span class="font-mono text-xs uppercase tracking-widest text-accent mb-6 block fade-up">
+        The Verified Software Report
+      </span>
+      <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8 fade-up">
+        AI is rewriting the world's software. Who checks <em class="text-accent italic">the math?</em>
+      </h1>
+      <p class="text-text-secondary text-lg md:text-xl leading-relaxed max-w-2xl mb-10 fade-up">
+        25–30% of code at Google and Microsoft is now AI-generated. By 2030, it could be 95%. Testing finds bugs. Mathematical proof eliminates them. This is the practitioner's guide to the verified software era.
+      </p>
+      <a
+        href="#subscribe"
+        class="inline-block bg-accent text-bg px-8 py-3 rounded font-semibold hover:bg-accent-dim transition-colors fade-up"
+      >
+        Get the newsletter
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <StatStrip />
+
+  <!-- Thesis -->
+  <section id="thesis" class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <span class="font-mono text-xs uppercase tracking-widest text-accent mb-4 block fade-up">01 — The Thesis</span>
+      <h2 class="font-serif text-3xl md:text-4xl mb-6 fade-up">The verification gap</h2>
+
+      <div class="max-w-2xl space-y-6 fade-up">
+        <p class="text-text-secondary leading-relaxed">
+          AI generates code faster than humans can review it. GitHub Copilot, Claude, and GPT-4 produce syntactically correct code at unprecedented speed — but correctness and security are not guaranteed. Testing catches bugs, but it can't prove their absence.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          Formal verification can. By encoding software behavior as mathematical theorems and mechanically checking the proofs, we get guarantees that hold for <em>every</em> possible input — not just the ones we thought to test.
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          The same AI that creates the verification gap can close it. Recent breakthroughs show AI agents converting production C code into Lean 4 with machine-checked proofs of correctness:
+        </p>
+      </div>
+
+      <div class="max-w-2xl">
+        <ProofBlock />
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <EcosystemGrid />
+
+  <!-- Roadmap -->
+  <Roadmap />
+
+  <!-- Newsletter -->
+  <section id="subscribe" class="bg-surface border-y border-border py-24 px-6">
+    <div class="max-w-xl mx-auto">
+      <NewsletterSignup />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+const projects = [
+  {
+    name: 'Lean FRO',
+    description: 'Core platform, 12+ years development, 8,000+ GitHub repos. The foundation of the verified software ecosystem.',
+    link: 'https://lean-lang.org',
+  },
+  {
+    name: 'LeanDojo / Caltech',
+    description: 'AI-driven theorem proving. LeanAgent automates proof generation. TorchLean brings verified neural networks.',
+    link: 'https://leandojo.org',
+  },
+  {
+    name: 'AWS Cedar',
+    description: 'Verified authorization policy engine. Production-grade, formally verified access control at scale.',
+    link: 'https://www.cedarpolicy.com',
+  },
+  {
+    name: 'Microsoft SymCrypt',
+    description: 'Verifying core cryptographic library in Lean. Machine-checked proofs for the crypto that powers Azure.',
+    link: 'https://github.com/microsoft/SymCrypt',
+  },
+  {
+    name: 'AlphaProof / DeepMind',
+    description: 'IMO silver medal via AI. Discovery-to-verified-proof pipeline pushing the frontier of automated reasoning.',
+    link: 'https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/',
+  },
+  {
+    name: 'Veil / NUS',
+    description: 'Distributed protocol verification in Lean. Found bugs missed by two prior verification tools.',
+    link: 'https://github.com/verse-lab/veil',
+  },
+];
+---
+
+<section id="ecosystem" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <span class="font-mono text-xs uppercase tracking-widest text-accent mb-4 block fade-up">02 — The Ecosystem</span>
+    <h2 class="font-serif text-3xl md:text-4xl mb-4 fade-up">Who's building the verified stack</h2>
+    <p class="text-text-secondary mb-12 max-w-2xl fade-up">
+      From research labs to production infrastructure, the ecosystem is broader than most practitioners realize.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      {projects.map(project => (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener"
+          class="block bg-surface border border-border rounded-lg p-6 hover:border-accent/30 transition-colors fade-up"
+        >
+          <h3 class="font-sans font-semibold text-text-primary mb-2">{project.name}</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">{project.description}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

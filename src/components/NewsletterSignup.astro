@@ -1,0 +1,79 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<div class={compact ? '' : 'text-center'}>
+  {!compact && (
+    <span class="font-mono text-xs uppercase tracking-widest text-accent mb-4 block">The Verified Software Report</span>
+  )}
+  {!compact && (
+    <h2 class="font-serif text-3xl md:text-4xl mb-4">Stay ahead of the curve</h2>
+  )}
+  <p class="text-text-secondary mb-8 max-w-xl {compact ? '' : 'mx-auto'}">
+    A biweekly dispatch on the convergence of AI and formal verification. New research, production deployments, and what practitioners need to know. No hype. No filler.
+  </p>
+
+  <form id={compact ? 'newsletter-compact' : 'newsletter-main'} class="flex flex-col sm:flex-row gap-3 {compact ? '' : 'max-w-md mx-auto'}">
+    <input
+      type="email"
+      name="email"
+      placeholder="you@company.com"
+      required
+      class="flex-1 bg-surface border border-border rounded px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:border-accent transition-colors"
+    />
+    <button
+      type="submit"
+      class="bg-accent text-bg px-6 py-3 rounded font-semibold hover:bg-accent-dim transition-colors whitespace-nowrap"
+    >
+      Subscribe
+    </button>
+  </form>
+
+  <p class="text-text-muted text-xs mt-3 {compact ? '' : 'text-center'}">Free. Unsubscribe anytime. No spam, ever.</p>
+
+  <div class="newsletter-message mt-3 text-sm hidden"></div>
+</div>
+
+<script>
+  document.querySelectorAll('form[id^="newsletter"]').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formEl = e.target as HTMLFormElement;
+      const email = new FormData(formEl).get('email') as string;
+      const msgEl = formEl.parentElement?.querySelector('.newsletter-message') as HTMLElement;
+      const btn = formEl.querySelector('button') as HTMLButtonElement;
+
+      btn.disabled = true;
+      btn.textContent = 'Subscribing...';
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          msgEl.textContent = 'You\'re in. Check your email to confirm.';
+          msgEl.className = 'newsletter-message mt-3 text-sm text-accent';
+          formEl.reset();
+        } else {
+          msgEl.textContent = 'Something went wrong. Try again?';
+          msgEl.className = 'newsletter-message mt-3 text-sm text-red-400';
+        }
+      } catch {
+        msgEl.textContent = 'Something went wrong. Try again?';
+        msgEl.className = 'newsletter-message mt-3 text-sm text-red-400';
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    });
+  });
+</script>

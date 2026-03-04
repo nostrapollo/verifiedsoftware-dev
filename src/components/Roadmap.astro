@@ -1,0 +1,42 @@
+---
+const items = [
+  { label: 'Cryptography', active: true },
+  { label: 'Core libraries & compression', active: true },
+  { label: 'Authorization & access control', active: true },
+  { label: 'Parsers & protocol implementations', active: false },
+  { label: 'Storage engines', active: false },
+  { label: 'Compilers & runtimes', active: false },
+  { label: 'Neural networks & AI models', active: false },
+];
+---
+
+<section class="py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <span class="font-mono text-xs uppercase tracking-widest text-accent mb-4 block fade-up">03 — The Roadmap</span>
+    <h2 class="font-serif text-3xl md:text-4xl mb-4 fade-up">What gets verified first</h2>
+    <p class="text-text-secondary mb-12 max-w-2xl fade-up">
+      Verification is spreading bottom-up through the stack, starting where correctness is most critical.
+    </p>
+
+    <div class="max-w-lg mx-auto">
+      {items.map((item, i) => (
+        <div class="flex items-start gap-4 fade-up">
+          <div class="flex flex-col items-center">
+            <div class={`w-3 h-3 rounded-full border-2 ${item.active ? 'bg-accent border-accent pulse-dot' : 'border-text-muted bg-transparent'}`}></div>
+            {i < items.length - 1 && (
+              <div class="w-px h-12 bg-border"></div>
+            )}
+          </div>
+          <div class="pb-8">
+            <span class={`text-sm font-medium ${item.active ? 'text-text-primary' : 'text-text-secondary'}`}>
+              {item.label}
+            </span>
+            {item.active && (
+              <span class="ml-2 font-mono text-xs text-accent">in progress</span>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

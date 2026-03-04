@@ -1,0 +1,51 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  author: string;
+  tags: string[];
+  readingTime: number;
+}
+
+const { title, description, date, author, tags, readingTime } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={`${title} — Verified Software`} description={description} ogType="article">
+  <article class="pt-32 pb-20 px-6">
+    <header class="max-w-[700px] mx-auto mb-12">
+      <div class="flex items-center gap-3 mb-6">
+        {tags.map(tag => (
+          <span class="font-mono text-xs uppercase tracking-wider text-accent">{tag}</span>
+        ))}
+      </div>
+      <h1 class="font-serif text-4xl md:text-5xl leading-tight mb-6">{title}</h1>
+      <div class="flex items-center gap-4 text-text-secondary text-sm">
+        <span>{formattedDate}</span>
+        <span class="text-text-muted">|</span>
+        <span>{author}</span>
+        <span class="text-text-muted">|</span>
+        <span>{readingTime} min read</span>
+      </div>
+    </header>
+
+    <div class="prose max-w-[700px] mx-auto">
+      <slot />
+    </div>
+  </article>
+
+  <section class="border-t border-border">
+    <div class="max-w-[700px] mx-auto px-6 py-16">
+      <NewsletterSignup compact={true} />
+    </div>
+  </section>
+</BaseLayout>

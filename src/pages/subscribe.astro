@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
+---
+
+<BaseLayout
+  title="Subscribe — Verified Software"
+  description="Get the Verified Software Report: a biweekly dispatch on the convergence of AI and formal verification."
+>
+  <section class="pt-32 pb-24 px-6">
+    <div class="max-w-xl mx-auto">
+      <NewsletterSignup />
+
+      <div class="mt-16 border-t border-border pt-12 fade-up">
+        <h2 class="font-serif text-2xl mb-6">What you'll get</h2>
+        <ul class="space-y-4 text-text-secondary">
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+            <span><strong class="text-text-primary">New research</strong> — Breakthroughs in automated theorem proving, AI-driven verification, and formal methods tooling.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+            <span><strong class="text-text-primary">Production deployments</strong> — Who's shipping verified software and what they've learned.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+            <span><strong class="text-text-primary">Ecosystem developments</strong> — Updates from Lean, Mathlib, LeanDojo, and the broader formal verification community.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+            <span><strong class="text-text-primary">Practical guidance</strong> — What this means for your stack, your team, and your roadmap.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
