@@ -60,7 +60,7 @@ const { compact = false } = Astro.props;
         const data = await res.json();
 
         if (data.success) {
-          msgEl.textContent = 'You\'re in. Check your email to confirm.';
+          msgEl.textContent = 'You\'re in. Welcome aboard.';
           msgEl.className = 'newsletter-message mt-3 text-sm text-accent';
           formEl.reset();
         } else {
