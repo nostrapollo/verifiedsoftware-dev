@@ -1,0 +1,7 @@
+name = "verifiedsoftware-dev"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "verifiedsoftware-subscribers"
+database_id = "0108feae-479e-4657-b984-9d24201953ab"

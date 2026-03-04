@@ -1,5 +1,6 @@
 export async function onRequestPost({ request, env }) {
-  const corsHeaders = {
+  const headers = {
+    'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -11,35 +12,22 @@ export async function onRequestPost({ request, env }) {
     if (!email || !email.includes('@')) {
       return new Response(
         JSON.stringify({ success: false, error: 'Valid email required' }),
-        { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
+        { status: 400, headers }
       );
     }
 
-    const res = await fetch('https://api.buttondown.com/v1/subscribers', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Token ${env.BUTTONDOWN_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, tags: ['website'] })
-    });
+    await env.DB.prepare(
+      'INSERT INTO subscribers (email, subscribed_at) VALUES (?, ?) ON CONFLICT(email) DO NOTHING'
+    ).bind(email.toLowerCase().trim(), new Date().toISOString()).run();
 
-    if (res.ok) {
-      return new Response(
-        JSON.stringify({ success: true }),
-        { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-      );
-    }
-
-    const err = await res.json();
     return new Response(
-      JSON.stringify({ success: false, error: err }),
-      { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
+      JSON.stringify({ success: true }),
+      { status: 200, headers }
     );
   } catch (e) {
     return new Response(
       JSON.stringify({ success: false, error: 'Server error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
+      { status: 500, headers }
     );
   }
 }
